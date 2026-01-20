@@ -1,38 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body >
-    <h1>Live Tracker</h1>
-<div style="border:4px solid black">
-<!--input-->
-<!--    location-->
-    <div class="Location">
-        <h3>Current Location</h3>
-        <button class="Location" id="loc">Location</button>
-        <p id="outloc">Loading Location.....</p>
-    </div>
-<!--    speed-->
-    <div class="Speed">
-          <h3>Speed</h3>
-     <p>Find out the speed!</p>
-    <button class="Speed" id="speed1">Speed</button>
-        <p id="ospeed">Speed Loading....</p>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>🔎 Live Weather Tracker</title>
+    </head>
+    <body>
+    <h1>📡 Live Tracker</h1>
+    <div class="container">
+        <div class="card Location">
+            <h3>Current Location</h3>
+            <button id="loc">Update Location</button>
+            <div id="outloc">Click to load location...</div>
         </div>
-<!--  LOCALITY  -->
-    <div class="visual">
-          <h3>Visuals</h3>
-        <p>LOCALITY</p>
-        <image id="image" src=""></image>
-        <button class="visual" id="vis">Visuals</button>
+
+        <div class="card Speed">
+            <h3>Current Speed</h3>
+            <p id="ospeed">000 km/h</p>
+            <button id="speed1">Measure Speed</button>
+        </div>
+
+        <div class="card visual">
+            <h3>Area Visuals</h3>
+            <p>LOCALITY VIEW</p>
+            <img id="image" src="https://via.placeholder.com/400x200?text=No+Visual+Data" alt="Location View">
+            <button id="vis">Capture Visuals</button>
+        </div>
     </div>
-    <!-- hvhg -->
-
-
-</div>
-<script defer src="script.js"></script>
+    <script defer src="script.js"></script>
 </body>
 </html>

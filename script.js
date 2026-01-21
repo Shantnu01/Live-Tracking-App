@@ -22,7 +22,7 @@ async function getLocData(lon,lang){
     const outerLoc = document.getElementById("outloc");
 
     outerLoc.outerHTML = `
-  <div id="outerLoc" style="font-family: sans-serif; line-height: 1.6">
+  <div id="outloc" style="font-family: sans-serif; line-height: 1.6">
     <h3>📍 Location Details</h3>
 
     <p><strong>Full Address:</strong> ${dt.display_name}</p>
@@ -43,7 +43,7 @@ async function getLocData(lon,lang){
 
 
 }
-// speed
+// speed s
 let watchId = null;
 let lastPosition = null;
 let totalDistance = 0;
@@ -66,8 +66,8 @@ navigator.geolocation.watchPosition(calcspe,calcer, {
       enableHighAccuracy: true,     
   maximumAge: 0,               
   timeout: Infinity,           
-  requireAltitude: true,       
-  requireHeading: true     
+//   requireAltitude: true,       
+//   requireHeading: true     
        
 });
 }
@@ -86,14 +86,14 @@ function calcspe(postion)
         if (timediff>0)
         {
             const speedKmph=(dist*3600)/(timediff*1000);
-            maxSpeed=Max(maxSpeed,speedKmph)
+            maxSpeed=Math.max(maxSpeed,speedKmph)
             totalDistance+=dist;
             updateDisplay(totalDistance,maxSpeed,speedKmph,watchId)//display value
         }
         lastPosition={
             coords:{
                 latitude:postion.coords.latitude,
-                longitude:postion.coords,longitude
+                longitude:postion.coords.longitude
 
             },
             timestamp:postion.timestamp
@@ -119,15 +119,15 @@ function calcer(er){
 }
 
 function updateDisplay(td,ms,s,W){
-    if(W){
-        stopbtn();
-    }
+    // if(W){
+    //     stopbtn();
+    // }
     ospeed.textContent=`${s} kmph`;
     poi.innerHTML+=
-    `<p>Total Distance : ${td} KM</p>
+    `<p>Total Distance : ${td/1000} KM</p>
      <p>Max Speed : ${ms} Km/h</p>`;
 
 
 }
 
-
+// ss

@@ -44,7 +44,7 @@ async function getLocData(lon,lang){
 
 }
 // speed s
-let watchId = null;
+let watchID = null;
 let lastPosition = null;
 let totalDistance = 0;
 let maxSpeed = 0;
@@ -56,19 +56,25 @@ function calcspeed(){
      if(!navigator.geolocation){
         return "Unable to find your location!.";
 }
+if(watchID==false)
+    watchID=true;
+if(watchID===true)
+    {watchID=false;
+   stopit();
+   speed1.textContent="Measure Speed";
+    }
+    speed1.textContent="STOP";
+
  lastPosition = null;
  totalDistance = 0;
  maxSpeed = 0;
  startTime = new Date();
 navigator.geolocation.watchPosition(calcspe,calcer, {
-   
- 
       enableHighAccuracy: true,     
   maximumAge: 0,               
   timeout: Infinity,           
 //   requireAltitude: true,       
 //   requireHeading: true     
-       
 });
 }
 
@@ -86,9 +92,9 @@ function calcspe(postion)
         if (timediff>0)
         {
             const speedKmph=(dist*3600)/(timediff*1000);
-            maxSpeed=Math.max(maxSpeed,speedKmph)
+            maxSpeed=Math.max(maxSpeed,speedKmph);
             totalDistance+=dist;
-            updateDisplay(totalDistance,maxSpeed,speedKmph,watchId)//display value
+            updateDisplay(totalDistance,maxSpeed,speedKmph,watchID)//display value
         }
         lastPosition={
             coords:{
@@ -114,20 +120,38 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
   return R * c;
 }
 
-function calcer(er){
-    console.log(er);
+function calcer(error){
+    
+  switch(error.code) {
+    case error.PERMISSION_DENIED:
+      x.innerHTML = "User denied the request for Geolocation."
+      break;
+    case error.POSITION_UNAVAILABLE:
+      x.innerHTML = "Location information is unavailable."
+      break;
+    case error.TIMEOUT:
+      x.innerHTML = "The request to get user location timed out."
+      break;
+    case error.UNKNOWN_ERROR:
+      x.innerHTML = "An unknown error occurred."
+      break;
+  }
 }
+
 
 function updateDisplay(td,ms,s,W){
     // if(W){
     //     stopbtn();
     // }
-    ospeed.textContent=`${s} kmph`;
+    ospeed.textContent=`${s} km/h`;
     poi.innerHTML+=
     `<p>Total Distance : ${td/1000} KM</p>
      <p>Max Speed : ${ms} Km/h</p>`;
 
 
+}
+function stopit(){
+    navigator.geolocation.clearWatch();
 }
 
 // ss

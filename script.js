@@ -44,6 +44,7 @@ async function getLocData(lon,lang){
 
 }
 // speed s
+let cds=null;
 let watchID = false;
 let lastPosition = null;
 let totalDistance = 0;
@@ -56,20 +57,14 @@ function calcspeed(){
      if(!navigator.geolocation){
         return "Unable to find your location!.";
 }
-if(watchID==false)
+if(watchID==false){
     watchID=true;
-else if(watchID===true)
-    {watchID=false;
-   stopit();
-   speed1.textContent="Measure Speed";
-    }
     speed1.textContent="STOP";
-
  lastPosition = null;
  totalDistance = 0;
  maxSpeed = 0;
  startTime = new Date();
-navigator.geolocation.watchPosition(calcspe,calcer, {
+let cds=navigator.geolocation.watchPosition(calcspe,calcer, {
       enableHighAccuracy: true,     
   maximumAge: 0,               
   timeout: Infinity,           
@@ -77,6 +72,11 @@ navigator.geolocation.watchPosition(calcspe,calcer, {
 //   requireHeading: true     
 });
 }
+else if(watchID===true)
+    {watchID=false;
+   stopit();
+   speed1.textContent="Measure Speed";
+    }}
 
 function calcspe(postion)
 {
@@ -151,7 +151,8 @@ function updateDisplay(td,ms,s,W){
 
 }
 function stopit(){
-    navigator.geolocation.clearWatch();
+    if(cds)
+    navigator.geolocation.clearWatch(cds);
 }
 
 // ss

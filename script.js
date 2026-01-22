@@ -52,6 +52,34 @@ let maxSpeed = 0;
 let startTime = null;
 // start
 speed1.addEventListener("click",calcspeed);//fxn watch id true use stop else play
+
+
+
+function calcspeed(){
+ 
+     if(!navigator.geolocation){
+        return "Unable to find your location!.";
+}
+if(watchID==false){
+    watchID=true;
+    speed1.textContent="STOP";
+ lastPosition = null;
+ totalDistance = 0;
+ maxSpeed = 0;
+ startTime = new Date();
+cds=navigator.geolocation.watchPosition(calcspe,calcer, {
+      enableHighAccuracy: true,     
+  maximumAge: 0,               
+  timeout: Infinity,           
+//   requireAltitude: true,       
+//   requireHeading: true     
+});
+}
+else if(watchID===true)
+    {watchID=false;
+   stopit();
+   speed1.textContent="Measure Speed";
+    }}
 function calcspe(postion)
 { 
     let speedkmph=0;
@@ -85,7 +113,6 @@ function calcspe(postion)
         timestamp:postion.timestamp
     }
 }
-
 function updateDisplay(td,ms,s){
     // Handle NaN/undefined values
     const currentSpeed = isNaN(s) || !isFinite(s) ? 0 : Math.round(s);
@@ -97,33 +124,6 @@ function updateDisplay(td,ms,s){
     Dist.innerHTML=`<p><b>Total Distance : ${(totalDist/1000).toFixed(3)} KM</b></p>`;
     Maspeed.innerHTML=`<p><b>Max Speed : ${maxSpeedValue} Km/h</b></p>`;
 }
-
-function calcspeed(){
- 
-     if(!navigator.geolocation){
-        return "Unable to find your location!.";
-}
-if(watchID==false){
-    watchID=true;
-    speed1.textContent="STOP";
- lastPosition = null;
- totalDistance = 0;
- maxSpeed = 0;
- startTime = new Date();
-cds=navigator.geolocation.watchPosition(calcspe,calcer, {
-      enableHighAccuracy: true,     
-  maximumAge: 0,               
-  timeout: Infinity,           
-//   requireAltitude: true,       
-//   requireHeading: true     
-});
-}
-else if(watchID===true)
-    {watchID=false;
-   stopit();
-   speed1.textContent="Measure Speed";
-    }}
-
 // function calcspe(postion)
 // { let speedkmph=0;
 //     const newTime= new Date()

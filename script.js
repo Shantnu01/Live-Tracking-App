@@ -44,7 +44,7 @@ async function getLocData(lon,lang){
 
 }
 // speed s
-let watchID = null;
+let watchID = false;
 let lastPosition = null;
 let totalDistance = 0;
 let maxSpeed = 0;
@@ -58,7 +58,7 @@ function calcspeed(){
 }
 if(watchID==false)
     watchID=true;
-if(watchID===true)
+else if(watchID===true)
     {watchID=false;
    stopit();
    speed1.textContent="Measure Speed";

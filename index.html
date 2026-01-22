@@ -1,12 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="style.css">
-        <title>🔎 Live Weather Tracker</title>
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>🔎 Live Weather Tracker</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+    <style>
+        #map {
+            height: 300px; /* Reduced height to fit in card */
+            width: 100%;
+            margin-top: 10px;
+            border-radius: 5px;
+        }
+        .visual {
+            /* Make the visual card a bit larger if needed */
+            min-height: 550px;
+        }
+    </style>
+</head>
+<body>
     <h1>📡 Live Tracker</h1>
     <div class="container">
         <div class="card Location">
@@ -14,24 +27,28 @@
             <button id="loc">Update Location</button>
             <div id="outloc">Click to load location...</div>
         </div>
- <!-- Speed -->
+        
         <div id="poi" class="card Speed">
             <h3>Current Speed</h3>
             <p id="ospeed">000 km/h</p>
             <button id="speed1">Measure Speed</button>
-            <p></p>
             <h3 id="Dist"><b>Distance:</b></h3>
             <h3 id="Maspeed"><b>Speed:</b></h3>
         </div>
-
+        
         <div class="card visual">
             <h3>Area Visuals</h3>
             <p>LOCALITY VIEW</p>
-            <img id="image" src="https://via.placeholder.com/400x200?text=No+Visual+Data" alt="Location View">
-            <button id="vis">Capture Visuals</button>
+            <!-- MAP ADDED INSIDE VISUAL CARD -->
+            <div style="margin-top: 20px;">
+                <h4>Location Map</h4>
+                <div id="map"></div>
+                <button id="loadMap" style="margin-top: 10px;">Load Map</button>
+            </div>
         </div>
     </div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
     <script defer src="script.js"></script>
 </body>
 </html>
-<!-- sdsd -->

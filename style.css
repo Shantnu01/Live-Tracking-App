@@ -71,15 +71,45 @@ h3 {
     margin-top: 10px;
 }
 
-#outerLoc p {
-    font-size: 0.9rem;
+#outloc {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
     text-align: left;
-    margin-bottom: 8px;
+    line-height: 1.4;
     color: #ddd;
+    margin-top: 10px;
 }
 
-#outerLoc strong {
+#outloc h3 {
     color: #39FF14;
+    font-size: 1rem;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#outloc p {
+    margin-bottom: 6px;
+    color: #bbb;
+}
+
+#outloc strong {
+    color: #39FF14;
+}
+
+#Dist, #Maspeed {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1rem;
+    color: #39FF14;
+    margin-top: 10px;
+    text-align: center;
+}
+
+#Dist p, #Maspeed p {
+    margin: 5px 0;
+    padding: 8px;
+    background: rgba(57, 255, 20, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(57, 255, 20, 0.2);
 }
 
 #image {
@@ -120,3 +150,4 @@ button:hover {
     background: #333;
     border-radius: 10px;
 }
+  

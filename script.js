@@ -157,4 +157,22 @@ function stopit(){
     navigator.geolocation.clearWatch(cds);
 }
 
-// ss
+//map
+loadMap.addEventListener("click",loadmap);
+function loadmap()
+{
+   const map = L.map('map');
+        
+        // Add map tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        
+        // Get current location and center map there
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(pos) {
+                const lat = pos.coords.latitude;
+                const lng = pos.coords.longitude;
+                map.setView([lat, lng], 13);
+                L.marker([lat, lng]).addTo(map);
+            });
+        }
+}

@@ -79,7 +79,7 @@ else if(watchID===true)
     }}
 
 function calcspe(postion)
-{
+{ let speedkmph=0;
     const newTime= new Date()
     if(lastPosition){
         const timediff=(newTime-new Date(lastPosition.timestamp))/1000;//in sec
@@ -91,12 +91,13 @@ function calcspe(postion)
         )
         if (timediff>0)
         {
-            const speedKmph=(dist*3600)/(timediff*1000);
+            speedkmph=(dist*3600)/(timediff*1000);
             maxSpeed=Math.max(maxSpeed,speedKmph);
             totalDistance+=dist;
-            updateDisplay(totalDistance,maxSpeed,speedKmph)//display value
+           
         }
     }
+     updateDisplay(totalDistance,maxSpeed,speedkmph)//display value
         lastPosition={
             coords:{
                 latitude:postion.coords.latitude,
@@ -142,16 +143,11 @@ function calcer(error){
 }
 
 
-function updateDisplay(td=0,ms=0,s=0){
-    // if(W){
-    //     stopbtn();
-    // }
-    ospeed.textContent=`${s} km/h`;
+function updateDisplay(td,ms,s){
+    ospeed.textContent=`${s.toFixed(2)} km/h`;
     
     Dist.innerHTML=`<p><b>Total Distance : ${(td/1000).toFixed(3)} KM</b></p>`
-    Maspeed.innerHTML=`<p><b>Max Speed : ${ms} Km/h</b></p>`;
-
-
+    Maspeed.innerHTML=`<p><b>Max Speed : ${ms.toFixed(2)} Km/h</b></p>`;
 }
 function stopit(){
     if(cds)

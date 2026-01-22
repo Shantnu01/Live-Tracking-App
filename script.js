@@ -52,6 +52,52 @@ let maxSpeed = 0;
 let startTime = null;
 // start
 speed1.addEventListener("click",calcspeed);//fxn watch id true use stop else play
+function calcspe(postion)
+{ 
+    let speedkmph=0;
+    const newTime= new Date()
+    if(lastPosition){
+        const timediff=(newTime-new Date(lastPosition.timestamp))/1000;
+        const dist=calculateDistance(
+           lastPosition.coords.latitude,
+           lastPosition.coords.longitude,
+           postion.coords.latitude,
+           postion.coords.longitude
+        )
+        if (timediff>0 && dist>0)
+        {
+            speedkmph=(dist*3600)/(timediff*1000);
+            // Check for valid speed (only NaN and Infinity checks)
+            if(!isNaN(speedkmph) && isFinite(speedkmph)) {
+                maxSpeed=Math.max(maxSpeed,speedkmph);
+                totalDistance+=dist;
+            } else {
+                speedkmph = 0;
+            }
+        }
+    }
+    updateDisplay(totalDistance,maxSpeed,speedkmph);
+    lastPosition={
+        coords:{
+            latitude:postion.coords.latitude,
+            longitude:postion.coords.longitude
+        },
+        timestamp:postion.timestamp
+    }
+}
+
+function updateDisplay(td,ms,s){
+    // Handle NaN/undefined values
+    const currentSpeed = isNaN(s) || !isFinite(s) ? 0 : Math.round(s);
+    const maxSpeedValue = isNaN(ms) || !isFinite(ms) ? 0 : Math.round(ms);
+    const totalDist = isNaN(td) || !isFinite(td) ? 0 : td;
+    
+    ospeed.textContent=`${currentSpeed} km/h`;
+    
+    Dist.innerHTML=`<p><b>Total Distance : ${(totalDist/1000).toFixed(3)} KM</b></p>`;
+    Maspeed.innerHTML=`<p><b>Max Speed : ${maxSpeedValue} Km/h</b></p>`;
+}
+
 function calcspeed(){
  
      if(!navigator.geolocation){
@@ -78,38 +124,38 @@ else if(watchID===true)
    speed1.textContent="Measure Speed";
     }}
 
-function calcspe(postion)
-{ let speedkmph=0;
-    const newTime= new Date()
-    if(lastPosition){
-        const timediff=(newTime-new Date(lastPosition.timestamp))/1000;//in sec
-        const dist=calculateDistance(
-           lastPosition.coords.latitude,
-           lastPosition.coords.longitude,
-           postion.coords.latitude,
-           postion.coords.longitude
-        )
-        if (timediff>0)
-        {
-            speedkmph=(dist*3600)/(timediff*1000);
-            maxSpeed=Math.max(maxSpeed,speedKmph);
-            totalDistance+=dist;
+// function calcspe(postion)
+// { let speedkmph=0;
+//     const newTime= new Date()
+//     if(lastPosition){
+//         const timediff=(newTime-new Date(lastPosition.timestamp))/1000;//in sec
+//         const dist=calculateDistance(
+//            lastPosition.coords.latitude,
+//            lastPosition.coords.longitude,
+//            postion.coords.latitude,
+//            postion.coords.longitude
+//         )
+//         if (timediff>0)
+//         {
+//             speedkmph=(dist*3600)/(timediff*1000);
+//             maxSpeed=Math.max(maxSpeed,speedkmph);
+//             totalDistance+=dist;
            
-        }
-    }
-     updateDisplay(totalDistance,maxSpeed,speedkmph)//display value
-        lastPosition={
-            coords:{
-                latitude:postion.coords.latitude,
-                longitude:postion.coords.longitude
+//         }
+//     }
+//      updateDisplay(totalDistance,maxSpeed,speedkmph)//display value
+//         lastPosition={
+//             coords:{
+//                 latitude:postion.coords.latitude,
+//                 longitude:postion.coords.longitude
 
-            },
-            timestamp:postion.timestamp
-        }
+//             },
+//             timestamp:postion.timestamp
+//         }
 
 
     
-}
+// }
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
   const R = 6371000; // Earth's radius in meters
@@ -143,15 +189,15 @@ function calcer(error){
 }
 
 
-function updateDisplay(td,ms,s){
-    ospeed.textContent=`${Math.round(s)} km/h`;
+// function updateDisplay(td,ms,s){
+//     ospeed.textContent=`${Math.round(s)} km/h`;
     
-    Dist.innerHTML=`<p><b>Total Distance : ${(td/1000).toFixed(3)} KM</b></p>`
-    Maspeed.innerHTML=`<p><b>Max Speed : ${Math.round(ms)} Km/h</b></p>`;
-}
-function stopit(){
-    if(cds)
-    navigator.geolocation.clearWatch(cds);
-}
+//     Dist.innerHTML=`<p><b>Total Distance : ${(td/1000).toFixed(3)} KM</b></p>`
+//     Maspeed.innerHTML=`<p><b>Max Speed : ${Math.round(ms)} Km/h</b></p>`;
+// }
+// function stopit(){
+//     if(cds)
+//     navigator.geolocation.clearWatch(cds);
+// }
 
 // ss

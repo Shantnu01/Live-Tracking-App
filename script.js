@@ -144,10 +144,10 @@ function calcer(error){
 
 
 function updateDisplay(td,ms,s){
-    ospeed.textContent=`${s.toFixed(2)} km/h`;
+    ospeed.textContent=`${Math.round(s)} km/h`;
     
     Dist.innerHTML=`<p><b>Total Distance : ${(td/1000).toFixed(3)} KM</b></p>`
-    Maspeed.innerHTML=`<p><b>Max Speed : ${ms.toFixed(2)} Km/h</b></p>`;
+    Maspeed.innerHTML=`<p><b>Max Speed : ${Math.round(ms)} Km/h</b></p>`;
 }
 function stopit(){
     if(cds)
